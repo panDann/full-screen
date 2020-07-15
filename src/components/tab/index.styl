@@ -1,0 +1,39 @@
+@import '~@src/styles/variables.styl'
+
+.tab-con
+    display flex
+    flex-flow: row nowrap
+    justify-content: flex-start
+    border-bottom: 1px solid $tabBorderColor
+    .item
+        padding: 10px 20px
+        font-size:16px;
+        font-weight:500;
+        color: $primaryFontColor
+    .active
+        border-bottom:  solid 3px $primaryColor
+        color:#fff
+.tab-card-con
+    display flex
+    flex-flow: row nowrap
+    justify-content: flex-start
+    box-sizing: border-box
+    padding: 0
+    .item
+        border-top: 1px solid $primaryColor
+        border-bottom: 1px solid $primaryColor
+        background: $secondBgColor
+        padding: 5px  10px
+        margin: 0
+        font-size:12px;
+        box-sizing: border-box
+        font-weight:500;
+        color:#4C88A7
+    .item:first-child
+        border-left: 1px solid $primaryColor
+    .item:last-child
+        border-right: 1px solid $primaryColor
+    .active
+        background: $primaryBgColor
+        color:#fff
+        

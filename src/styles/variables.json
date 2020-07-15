@@ -1,0 +1,10 @@
+{
+    "$primaryColor": "#3390FB",
+    "$success": "#52BE57",
+    "$warning": "#FF9851",
+    "$error": "#FD6737",
+    "$body": "#EFEFF4",
+    "$listLeft": "#000",
+    "$listRight": "#666",
+    "$explain": "#888"
+}

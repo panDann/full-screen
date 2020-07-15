@@ -1,0 +1,169 @@
+@import './variables';
+@import './box';
+@import './flex';
+@import './text';
+@import './color';
+@import './position';
+@import './wx-components';
+html {
+    font-family:$primaryFamily
+}
+.radio-size {
+    font-size: 10px
+    }
+.bottom-btn {
+    position fixed
+    bottom 3rem
+    left 0 
+    right 0 
+    margin auto
+    }
+.search-input {
+    border solid 1px $grey;
+    border-radius: 2rem
+    // width: 100%
+    padding: .5rem 1rem
+    margin: .3rem 0
+    }
+
+.hidden {
+    visibility hidden
+    }
+
+
+.width30 {
+    width: 30%
+    }
+.width40 {
+    width: 40%
+    }
+.width50 {
+    width: 50%
+    }
+.width80 {
+    width: 80%
+    }
+.width100 {
+    width: 100%
+    }
+
+
+.list-label 
+    font-size:28px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+    line-height:40px;
+.list-value
+    font-size:28px;
+    font-weight:400;
+    color:rgba(136,136,136,1);
+    line-height:40px;
+.list-input
+    text-align: right 
+.holder-img
+	position relative
+	z-index 2
+	width:217px;
+	height:142px;
+	background:rgba(239,239,239,1);
+	border:1px solid rgba(222,222,222,1);
+.holder-img:before
+	content attr(mode)
+	position absolute
+	top 0
+	bottom 0
+	left 0
+	right 0
+	z-index 1
+	margin auto
+	height:40px;
+	text-align center
+	font-size:28px;
+	font-weight:400;
+	color:rgba(153,153,153,1);
+	line-height:40px;
+
+
+.mini-btn
+	display inline
+	height auto;
+	padding: 8px 20px 
+
+	font-size:26px;
+	font-weight:400;
+	text-align: center
+	line-height:36px;
+	border-radius 6px
+.primary-btn
+	background #D6E9FF
+	color #7FB0E9
+	border 2px solid #7FB0E9
+.grey-btn{
+    background #EFEFEF
+	color #333333}
+.error-btn
+	background  #FFE5DD
+	color $error
+	border 2px solid $error
+.warning-btn
+	background  #FFF4D6
+	color $warning
+	border 2px solid $warning
+.success-btn
+	background  #fff
+	color $success
+	border 2px solid $success
+.circle-btn
+    border-radius: 30px
+
+.primary-textarea
+    width: 100%
+    min-height: 50px
+    padding $primaryPadding
+    border-top 2px solid #E5E5E5
+    border-bottom 2px solid #E5E5E5
+// full-screen start
+.select 
+    padding: 5px
+    margin: 0 .5rem
+    background: $secondBgColor
+    color $primaryColor
+    // font-size: 20px
+    border: 1px solid $primaryColor
+    box-shadow: $primaryBoxShadow
+.select option
+    padding:  10px
+    font-size: 14px
+// input[type="date" i] 
+//     content '\eaee'
+//     align-items: center;
+//     display: -webkit-inline-flex;
+//     font-family: monospace;
+//     padding-inline-start: 1px;
+//     cursor: default;
+//     overflow: hidden;
+//     padding: 0px;
+
+.rotate-180
+    display inline-block
+    transform: rotate(180deg)
+    
+.shadow
+    box-shadow: $primaryBoxShadow
+
+.warning-title
+    font-size:16px;
+    font-weight:500;
+    color:$warning
+    line-height:22px;
+.warning-title:before
+    content: ''
+    display inline-block
+    line-height:22px;
+    margin-right: $primaryPadding
+    width:10px;
+    height:10px;
+    border-radius: 50%
+    background:$warning
+.bottom-line
+    border-bottom: solid 1px $tabBorderColor

@@ -1,0 +1,44 @@
+@import '~@src/styles/variables.styl'
+
+.selector-con
+    margin: 0 .5rem
+    padding: $primaryPadding 0
+    width 150px
+    background: $secondBgColor
+    border solid 1px $primaryColor
+    border-bottom: none
+    box-shadow: $primaryBoxShadow
+    select 
+        background: $secondBgColor
+        color $primaryColor
+        border: none
+        outline: none
+.area
+    display flex
+    flex-flow: row wrap
+    justify-content: space-around
+    margin: 0 .5rem
+    max-width 400px
+    background: $secondBgColor
+    border solid 1px $primaryColor
+    box-shadow: $primaryBoxShadow
+    
+    .item
+        padding: .5rem
+        margin: .5rem
+        text-align: center
+        width: 20%
+        cursor pointer
+    .active
+        background: linear-gradient(to left, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) left top no-repeat, 
+                    linear-gradient(to bottom, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) left top no-repeat, 
+                    linear-gradient(to left, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) right top no-repeat,
+                    linear-gradient(to bottom, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) right top no-repeat, 
+                    linear-gradient(to left, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) left bottom no-repeat,
+                    linear-gradient(to bottom, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) left bottom no-repeat,
+                    linear-gradient(to left, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) right bottom no-repeat,
+                    linear-gradient(to left, rgb(23, 224, 255.1), rgb(23, 224, 255.1)) right bottom no-repeat;
+        background-size: 0.15rem 0.6rem, 0.6rem 0.15rem, 0.15rem 0.6rem, 0.6rem 0.15rem;
+
+
+        

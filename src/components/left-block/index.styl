@@ -1,0 +1,53 @@
+
+$arrowSize = 24px
+minus(a)
+    a / 1.05
+.con
+    position absolute
+    top: $headerImgOffset
+    left $floatBoxMargin
+    height $leftHeight
+    width: 400px
+    // overflow hidden
+    transition: left .2s linear
+    z-index $leftBoxIndex
+    padding: $primaryPadding
+    
+    background:linear-gradient(180deg,rgba(0,57,188,1) 0%,rgba(0,72,240,1) 51%,rgba(0,72,240,.6) 100%);
+    box-shadow:$primaryBoxShadow;
+    border-radius:2px 2px 0px 12px;
+    border:1px solid rgba(51,183,255,1);
+    .arrow
+        position absolute
+        right -30px
+        top: 45%
+        bottom: 0
+        height 50px
+        width: 30px
+        text-align: center
+        color $primaryColor
+        line-height: 50px
+        background rgba(0,72,240,0.6)
+        border-radius:0 10% 10% 0;
+        box-shadow:$primaryBoxShadow;
+    .left-menu
+        height minus($leftHeight)
+        border-right: 1px solid $primaryColor
+        font-size: 16px
+        text-align: center
+        color: $primaryFontColor
+        .item
+            margin: 30px 0
+            cursor pointer
+        .item-active
+            color: $primaryColor
+        i 
+          font-size: 32px
+    .right-content
+        align-self: flex-start  
+        padding-left: 10px  
+.con-hide
+    left -400px
+    padding: 0
+    
+        
