@@ -14,12 +14,14 @@
               <span class="warning-title">雪亮应用</span>
               <div class="flex-row font14 color-739DFF  justify-around">
                   <div>
-                      <p >水纹监测</p>
-                      <p >地质灾害隐患点</p>
+                      <p> <CheckBox label='水纹监测' /></p>
+                      <p> <CheckBox label='地质灾害隐患点' /></p>
+
                   </div>
                   <div>
-                      <p >低洼户</p>
-                      <p >转移安置点</p>
+                      <p> <CheckBox label='低洼户' /></p>
+                      <p> <CheckBox label='转移安置点' /></p>
+
                   </div>
               </div>
           </div>
@@ -36,12 +38,15 @@
 
 <script>
 import Tab from '@src/components/tab/index.vue'
+import CheckBox from '@src/components/checkbox'
+
 import TabPane from '@src/components/tab-pane/index.vue'
 import { subTabList } from './const'
 
 export default {
   components: {
     Tab,
+    CheckBox,
     TabPane
   },
   props: {

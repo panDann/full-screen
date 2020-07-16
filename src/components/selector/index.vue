@@ -1,15 +1,16 @@
 
 <template>
 <div>
-      <div class="flex-row justify-around  selector-con">
-        <div class="iconfont  primary-color font26 icon-chengshi" />
-        <select class="font16">
-        <option value="">11111</option>
-        <option value="">11111</option>
-        <option value="">11111</option>
-      </select>
+      <div class="flex-row justify-around primary-color  selector-con">
+        <div class="iconfont  font26 icon-chengshi" />
+
+        <div class="font20 ">曹江镇</div>
+        <!-- <select >
+        <option value="">曹江镇</option>
+
+      </select> -->
       </div>
-      <div class="area primary-color box-shadow ">
+      <!-- <div class="area primary-color box-shadow ">
         <div v-for="item in list" :key="item.name"
         class="item"
         :class="currentName===item.name&&'active'"
@@ -18,7 +19,7 @@
           <i class="iconfont icon-ditu font32" />
           <div class="font16">{{item.name}}</div>
         </div>
-      </div>
+      </div> -->
 </div>
 </template>
 

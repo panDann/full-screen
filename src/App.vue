@@ -14,7 +14,10 @@ import LeftBlock from '@src/components/left-block/index.vue'
 import BottomBlock from '@src/components/bottom-block/index.vue'
 import Seletor from '@src/components/selector/index.vue'
 
-const MAX_WIDTH = 1920
+import {
+  resize, testPaths, paintText, calcLabelPosition,
+  paintPolygon
+} from './const'
 export default {
   components: {
     LeftBlock,
@@ -34,35 +37,41 @@ export default {
   },
   mounted () {
     this.init()
-    this.resizeView()
-    window.addEventListener('resize', this.resizeView)
-  },
+    this.classObj = resize()
 
+    window.addEventListener('resize', () => {
+      this.classObj = resize()
+    })
+  },
   destroyed () {
-    window.removeEventListener('resize', this.resizeView)
+    window.removeEventListener('resize')
   },
   methods: {
     init () {
       this.map = new window.AMap.Map('map', {
-        resizeEnable: true, // 是否监控地图容器尺寸变化
-        center: [110.88, 21.68],
+        // resizeEnable: true, // 是否监控地图容器尺寸变化
+        // center: [110.88, 21.68],
+        showLabel: false,
+        center: [110.892384, 21.84279],
+        zoom: 11,
         mapStyle: 'amap://styles/680b7e9dc654ed22c25c9a3788bfd3aa'
       })
+      // this.map.on('click', this.zoomEnd)
+
+      // this.paintPolygon()
+      testPaths.forEach(el => {
+        paintPolygon(el.path, this.map)
+        paintText(el.name, calcLabelPosition(el.path), this.map)
+      })
     },
-    resizeView () {
-      const bodyWidth = document.documentElement.clientWidth
-      const bodyHeight = document.documentElement.clientHeight
-      const scaleRate = bodyWidth / MAX_WIDTH
-      const scaleRateH = (bodyHeight + 15) / 1080
-      this.classObj = {
-        transform: `scaleX(${scaleRate}) scaleY(${scaleRateH})`
-        // transform: `scaleX(${scaleRate})`
-      }
-      document.body.style.height = bodyHeight + 'px'
-    },
+
     onChange () {
 
+    },
+    zoomEnd (e) {
+      console.log(e)
     }
+
   }
 }
 </script>

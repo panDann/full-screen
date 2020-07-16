@@ -23,7 +23,11 @@
               </div>
           </div>
           <div class="right-content flex4">
+
+            <Security  v-if="currentLeftIndex===0" />
+            <Petition  v-if="currentLeftIndex===1" />
             <Three  v-if="currentLeftIndex===2" />
+            <Solid  v-if="currentLeftIndex===3" />
           </div>
         </div>
       </TabPane>
@@ -36,11 +40,17 @@ import Tab from '@src/components/tab/index.vue'
 import TabPane from '@src/components/tab-pane/index.vue'
 import { tabList, leftMenu } from './const'
 import Three from './components/three'
+import Security from './components/security'
+import Petition from './components/petition'
+import Solid from './components/solid'
 export default {
   components: {
     Tab,
     TabPane,
-    Three
+    Three,
+    Security,
+    Petition,
+    Solid
   },
   props: {
     // value: {
