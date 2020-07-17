@@ -4,18 +4,22 @@
     <div class="flex-row font14 color-739DFF justify-around">
       <div>
         <p>
-          <CheckBox label="水纹监测" />
+          <CheckBox @change="(value)=>onChange({type:value})" label="刑事前科人员" />
         </p>
         <p>
-          <CheckBox label="地质灾害隐患点" />
+          <CheckBox @change="(value)=>onChange({type:value})" label="社区纠正人员" />
         </p>
+        <p>
+          <CheckBox @change="(value)=>onChange({type:value})" label="涉黑涉恶人员" />
+        </p>
+
       </div>
       <div>
         <p>
-          <CheckBox label="低洼户" />
+          <CheckBox @change="(value)=>onChange({type:value})" label="邢释人员" />
         </p>
         <p>
-          <CheckBox label="转移安置点" />
+          <CheckBox @change="(value)=>onChange({type:value})" label="吸毒人员" />
         </p>
       </div>
     </div>
@@ -29,34 +33,9 @@ export default {
   components: {
     CheckBox
   },
-  props: {
-    // value: {
-    //   type: String,
-    //   required: true,
-    //   default: ''
-    // },
-    // tabList: {
-    //   type: Array,
-    //   required: true,
-    //   default: () => []
-    // }
-  },
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
-  data () {
-    return {
-      isHide: false,
-      currentName: 'three',
-      currentLeftIndex: 0
-    }
-  },
-
   methods: {
-    transferTab (key) {
-      this.currentName = key
-      this.$emit('input', key)
+    onChange (obj) {
+      this.$emit('change', obj)
     }
   }
   // render(h){

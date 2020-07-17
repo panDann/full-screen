@@ -5,10 +5,10 @@
       <i class="iconfont icon-jiantou" :class="isHide?'':'rotate-180'" />
     </div>
     <div class="con flex-row justify-around" :class="isHide?'con-hide':''">
-    <BaseInfo :baseInfo='baseInfo'  class="flex2" />
+    <FirstBaseInfo :baseInfo='baseInfo'  class="flex4" />
     <div class="bar"></div>
 
-    <div style=" align-self:flex-start"  class="flex3">
+    <!-- <div style=" align-self:flex-start"  class="flex3">
         <div class="flex-row white justify-between">
           <span>分析情况</span>
           <div class="flex-row justify-between">
@@ -22,87 +22,49 @@
             </div>
           </div>
         </div>
-        <Chart :chartData='chartData' width='500px' height='250px'/>
-    </div>
+        <Chart :chartData='statisticData' width='500px' height='250px'/>
+    </div> -->
+    <BaseInfo :baseInfo='baseInfo'  class="flex3" />
 
     <div class="bar"></div>
-    <Event :list='eventList' class="flex3" />
+    <Event :list='events' class="flex3" />
     <div class="bar"></div>
-    <Video :list='videoList'  class="flex5" />
+    <Video :list='video'  class="flex3" />
   </div>
 </div>
 </template>
 
 <script>
 import BaseInfo from './components/base-info'
-import Chart from './components/chart'
+import FirstBaseInfo from './components/first-base-info'
+// import Chart from './components/chart'
 import Video from './components/video'
 import Event from './components/event'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     BaseInfo,
-    Chart,
+    FirstBaseInfo,
     Video,
     Event
   },
-  // props: {
-  //   value: {
-  //     type: String,
-  //     required: true,
-  //     default: ''
-  //   },
-
-  //   tabList: {
-  //     type: Array,
-  //     required: true,
-  //     default: () => []
-  //   }
-  // },
+  computed: {
+    ...mapState([
+      'baseInfo',
+      'statisticData',
+      'events',
+      'video'
+    ])
+  },
 
   data () {
     return {
       isHide: false,
-
-      baseInfo: {
-        net: '111',
-        name: '222',
-        phone: '333'
-      },
-      currentActiveChartIndex: 0,
-      chartData: {
-        xAxisData: [11, 33],
-        yAxisData: [[10, 20], [20]]
-      },
-      eventList: [
-        {
-          name: '22222',
-          time: '2019'
-        }
-      ],
-      videoList: [
-        {
-          url: '22222'
-        },
-        {
-          url: '22222'
-        },
-        {
-          url: '22222'
-        }
-      ]
-    }
-  },
-
-  methods: {
-    transferTab (key) {
-      this.currentName = key
-      this.$emit('input', key)
+      currentActiveChartIndex: 0
     }
   }
-  // render(h){
-  //     return
-  // }
+
 }
 </script>
 

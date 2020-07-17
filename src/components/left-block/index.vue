@@ -4,11 +4,6 @@
     <div class="arrow" @click="isHide=!isHide">
       <i class="iconfont icon-jiantou-copy" :class="isHide?'':'rotate-180'" />
     </div>
-    <!-- <select class="icon-chengshi select">
-      <option value>222</option>
-      <option value>222</option>
-      <option value>222</option>
-    </select>-->
     <Tab v-model="currentName" :tab-list="tabList">
       <TabPane name="function">
         <div class="flex-row justify-start">
@@ -23,11 +18,10 @@
               </div>
           </div>
           <div class="right-content flex4">
-
-            <Security  v-if="currentLeftIndex===0" />
-            <Petition  v-if="currentLeftIndex===1" />
-            <Three  v-if="currentLeftIndex===2" />
-            <Solid  v-if="currentLeftIndex===3" />
+            <Security  @change='onChange' v-if="currentLeftIndex===0" />
+            <Petition  @change='onChange' v-if="currentLeftIndex===1" />
+            <Three  @change='onChange' v-if="currentLeftIndex===2" />
+            <Solid  @change='onChange' v-if="currentLeftIndex===3" />
           </div>
         </div>
       </TabPane>
@@ -43,6 +37,7 @@ import Three from './components/three'
 import Security from './components/security'
 import Petition from './components/petition'
 import Solid from './components/solid'
+import { mapActions } from 'vuex'
 export default {
   components: {
     Tab,
@@ -52,22 +47,7 @@ export default {
     Petition,
     Solid
   },
-  props: {
-    // value: {
-    //   type: String,
-    //   required: true,
-    //   default: ''
-    // },
-    // tabList: {
-    //   type: Array,
-    //   required: true,
-    //   default: () => []
-    // }
-  },
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
+
   data () {
     return {
       isHide: false,
@@ -82,6 +62,12 @@ export default {
     transferTab (key) {
       this.currentName = key
       this.$emit('input', key)
+    },
+    // ...mapMutations(['comFilterObj']),
+    ...mapActions(['actPoints']),
+    onChange (currentObj) {
+      console.log(111, currentObj)
+      this.$store.commit('comFilterObj', currentObj)
     }
   }
   // render(h){

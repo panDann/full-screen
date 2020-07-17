@@ -14,13 +14,13 @@
               <span class="warning-title">雪亮应用</span>
               <div class="flex-row font14 color-739DFF  justify-around">
                   <div>
-                      <p> <CheckBox label='水纹监测' /></p>
-                      <p> <CheckBox label='地质灾害隐患点' /></p>
+                      <p> <CheckBox @change="(value)=>onChange({type:value})" label='水纹监测' /></p>
+                      <p> <CheckBox @change="(value)=>onChange({type:value})" label='地质灾害隐患点' /></p>
 
                   </div>
                   <div>
-                      <p> <CheckBox label='低洼户' /></p>
-                      <p> <CheckBox label='转移安置点' /></p>
+                      <p> <CheckBox @change="(value)=>onChange({type:value})" label='低洼户' /></p>
+                      <p> <CheckBox @change="(value)=>onChange({type:value})" label='转移安置点' /></p>
 
                   </div>
               </div>
@@ -75,9 +75,8 @@ export default {
   },
 
   methods: {
-    transferTab (key) {
-      this.currentName = key
-      this.$emit('input', key)
+    onChange (obj) {
+      this.$emit('change', obj)
     }
   }
   // render(h){
