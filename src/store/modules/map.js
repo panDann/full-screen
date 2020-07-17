@@ -1,7 +1,20 @@
 
 export default {
   state: {
-    points: [],
+    zoom: 11,
+    loading: false,
+    points: [
+      {
+        name: '111',
+        gender: '111',
+        age: '111',
+        origin: '111',
+        lng: 111.057385,
+        lat: 21.914163,
+        pointType: 'icon-yonghu'
+      }
+
+    ],
     firstNetworkData: [
       {
         name: '罗平村',
@@ -122,6 +135,12 @@ export default {
     forthNetworkData: []
   },
   mutations: {
+    comZoom (sta, payload) {
+      sta.zoom = payload
+    },
+    comLoading (sta, payload) {
+      sta.loading = payload
+    },
     comPoints (sta, payload) {
       sta.points = payload
     },

@@ -5,7 +5,7 @@
       <i class="iconfont icon-jiantou" :class="isHide?'':'rotate-180'" />
     </div>
     <div class="con flex-row justify-around" :class="isHide?'con-hide':''">
-    <FirstBaseInfo :baseInfo='baseInfo'  class="flex4" />
+    <FirstBaseInfo :baseInfo='firstBaseInfo'  class="flex4" />
     <div class="bar"></div>
 
     <!-- <div style=" align-self:flex-start"  class="flex3">
@@ -51,8 +51,9 @@ export default {
   },
   computed: {
     ...mapState([
+      'firstBaseInfo',
       'baseInfo',
-      'statisticData',
+      // 'statisticData',
       'events',
       'video'
     ])

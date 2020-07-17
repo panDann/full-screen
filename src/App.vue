@@ -1,8 +1,8 @@
 <template>
   <div id="app" ref="app" :style="classObj">
+    <div class="loading" v-show="loading"></div>
     <img :src="headerPng" alt class="header-img" />
     <div id="map" class="map"></div>
-
     <LeftBlock />
     <BottomBlock />
     <Seletor class="selector" @change="onChange" />
@@ -19,7 +19,8 @@ import {
   resize,
   paintText,
   calcLabelPosition,
-  paintPolygon
+  paintPolygon,
+  paintPoint
 } from './const'
 export default {
   components: {
@@ -29,6 +30,9 @@ export default {
   },
   computed: {
     ...mapState([
+      'zoom',
+      'points',
+      'loading',
       'firstNetworkData',
       'secondNetworkData',
       'thirdNetworkData',
@@ -52,8 +56,12 @@ export default {
     window.addEventListener('resize', () => {
       this.classObj = resize()
     })
+    const _this = this
     window.addEventListener('click_point', function (event) {
-      console.log('得到标题为：', event.msg)
+      _this.map.setZoom(14)
+      const { lng, lat } = event.msg
+      _this.map.setCenter([lng, lat])
+      _this.map.setZoom(13)
     })
   },
   destroyed () {
@@ -72,7 +80,10 @@ export default {
 
       this.firstNetworkData.forEach(el => {
         paintPolygon(el.path, this.map)
-        paintText(el.name, calcLabelPosition(el.path), this.map)
+        paintText({ text: el.name, position: calcLabelPosition(el.path) }, this.map)
+      })
+      this.points.forEach(el => {
+        paintPoint(el, this.map)
       })
     },
     ...mapActions([

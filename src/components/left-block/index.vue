@@ -4,24 +4,46 @@
     <div class="arrow" @click="isHide=!isHide">
       <i class="iconfont icon-jiantou-copy" :class="isHide?'':'rotate-180'" />
     </div>
+    <div class="atmosphere font14 white" v-show="showAtmosphere">
+      <div class="top">
+        <span>{{atmosphereMsg.time}}</span>
+        <span class="day">{{atmosphereMsg.day}}</span>
+        <span>{{atmosphereMsg.lunar}}</span>
+          </div>
+      <div class="flex-row middle">
+        <i class="icon-tianqi1 iconfont font32" />
+        <div class="bar"></div>
+        <div class="flex-row">
+          <span class="font32 real-degree">{{atmosphereMsg.realDegree}}</span>
+          <div class="font14">
+            <div>&#8451;</div>
+            <div>{{atmosphereMsg.realState}}(实时)</div>
+          </div>
+        </div>
+      </div>
+      <div class="range">{{atmosphereMsg.minDegree}}~{{atmosphereMsg.maxDegree}}&#8451;</div>
+      <div class="bottom">{{atmosphereMsg.state}} | {{atmosphereMsg.wind}} {{atmosphereMsg.airQuality}}</div>
+    </div>
     <Tab v-model="currentName" :tab-list="tabList">
       <TabPane name="function">
         <div class="flex-row justify-start">
           <div class="left-menu flex1">
-              <div v-for="(item,index) in leftMenu"
-               :key="item.name" class="item"
-               :class="currentLeftIndex ===index?'item-active':''"
-               @click="currentLeftIndex = index"
-               >
-             <i class="iconfont " :class="item.icon" />
+            <div
+              v-for="(item,index) in leftMenu"
+              :key="item.name"
+              class="item"
+              :class="currentLeftIndex ===index?'item-active':''"
+              @click="currentLeftIndex = index"
+            >
+              <i class="iconfont" :class="item.icon" />
               <div>{{item.name}}</div>
-              </div>
+            </div>
           </div>
           <div class="right-content flex4">
-            <Security  @change='onChange' v-if="currentLeftIndex===0" />
-            <Petition  @change='onChange' v-if="currentLeftIndex===1" />
-            <Three  @change='onChange' v-if="currentLeftIndex===2" />
-            <Solid  @change='onChange' v-if="currentLeftIndex===3" />
+            <Security @change="onChange" v-if="currentLeftIndex===0" />
+            <Petition @change="onChange" v-if="currentLeftIndex===1" />
+            <Three @change="onChange" v-if="currentLeftIndex===2" />
+            <Solid @change="onChange" v-if="currentLeftIndex===3" />
           </div>
         </div>
       </TabPane>
@@ -30,6 +52,7 @@
 </template>
 
 <script>
+// import  from '@src/assets/atmosphere.png'
 import Tab from '@src/components/tab/index.vue'
 import TabPane from '@src/components/tab-pane/index.vue'
 import { tabList, leftMenu } from './const'
@@ -37,7 +60,7 @@ import Three from './components/three'
 import Security from './components/security'
 import Petition from './components/petition'
 import Solid from './components/solid'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   components: {
     Tab,
@@ -47,7 +70,9 @@ export default {
     Petition,
     Solid
   },
-
+  computed: {
+    ...mapState(['atmosphereMsg', 'showAtmosphere'])
+  },
   data () {
     return {
       isHide: false,
@@ -78,5 +103,4 @@ export default {
 
 <style lang='stylus' scoped>
 @import './index.styl';
-
 </style>

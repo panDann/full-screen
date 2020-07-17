@@ -1,7 +1,7 @@
 
 <template>
 <div class="con" @click="currentValue=!currentValue,$emit('input',currentValue),$emit('change',currentValue)">
-  <button class="box" :class="currentValue&&'checked'"><span v-show="currentValue">&radic;</span></button>
+  <button class="box" :class="currentValue&&'checked icon-duoxuankuang  iconfont '"></button>
   <label class="label">{{label}}</label>
 </div>
 </template>

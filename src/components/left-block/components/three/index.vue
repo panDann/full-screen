@@ -2,9 +2,9 @@
 <template>
     <Tab v-model="currentName" :tab-list="subTabList">
       <TabPane name="three">
-          <div class="flex-row bottom-line paddingtb10 justify-between">
+          <div class="flex-row bottom-line paddingtb10 pointer justify-between" @click="tranferShowAtmosphere">
               <span class="warning-title">气象信息</span>
-              <i class="iconfont font32 paddinglr1rem second-color icon-tianqi" />
+              <i class="iconfont font32 paddinglr1rem  icon-tianqi" :class="isHide?'primary-color':'second-color'" />
           </div>
           <div class="flex-row bottom-line paddingtb10 justify-between">
               <span class="warning-title">会务研判</span>
@@ -42,6 +42,7 @@ import CheckBox from '@src/components/checkbox'
 
 import TabPane from '@src/components/tab-pane/index.vue'
 import { subTabList } from './const'
+// import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
@@ -49,22 +50,7 @@ export default {
     CheckBox,
     TabPane
   },
-  props: {
-    // value: {
-    //   type: String,
-    //   required: true,
-    //   default: ''
-    // },
-    // tabList: {
-    //   type: Array,
-    //   required: true,
-    //   default: () => []
-    // }
-  },
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
+
   data () {
     return {
       isHide: false,
@@ -77,6 +63,9 @@ export default {
   methods: {
     onChange (obj) {
       this.$emit('change', obj)
+    },
+    tranferShowAtmosphere () {
+      this.$store.commit('comShowAtmosphere', this.isHide = !this.isHide)
     }
   }
   // render(h){

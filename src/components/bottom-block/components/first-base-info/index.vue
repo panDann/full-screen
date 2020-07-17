@@ -2,27 +2,14 @@
 <template>
     <div class="base-con">
      <div class=" white margintb10">基本信息</div>
-     <div class="content">
-        <div class="margintb10 flex-row justify-start">
-          <i class=" iconfont font32 paddinglr1rem icon-wangge" />
-          <div>
-            <div>所在网格</div>
-            <div>{{baseInfo.net}}</div>
-          </div>
-        </div>
-        <div class="margintb10 flex-row justify-start">
-          <i class=" iconfont font32 paddinglr1rem icon-fuzeren" />
-          <div>
-            <div>网格负责人</div>
+     <div class="content flex-row justify-start">
+        <img :src="baseInfo.avatar" class="avatar" alt="">
+        <div class=" info-con">
             <div>{{baseInfo.name}}</div>
-          </div>
-        </div>
-        <div class="margintb10 flex-row justify-start">
-          <i class="iconfont font32 paddinglr1rem icon-shouji" />
-          <div>
-            <div>网格负责人电话</div>
-            <div>{{baseInfo.phone}}</div>
-          </div>
+            <div>{{baseInfo.gender}} | {{baseInfo.age}} | {{baseInfo.origin}} | {{baseInfo.academic}} | {{baseInfo.belong}}</div>
+            <div><span class="width-ch20">联系电话：</span> {{baseInfo.phone}} &nbsp;&nbsp;&nbsp; 身份证号： {{baseInfo.idCard}}</div>
+            <div><span class="width-ch20">住址：</span>{{baseInfo.address}}</div>
+            <div><span class="width-ch20">简介：</span>{{baseInfo.introduction}}</div>
         </div>
      </div>
     </div>
@@ -39,7 +26,7 @@ export default {
     baseInfo: {
       type: Object,
       required: true,
-      default: () => {}
+      default: () => ({})
     }
   }
 
@@ -58,6 +45,17 @@ export default {
   font-size:13px;
   font-weight:500;
   color:rgba(147,205,255,1);
-  line-height:25px
+  line-height:20px
+  .avatar
+    width:74px;
+    height:83px;
+    align-self flex-start
+    margin-right 2rem
+    background #999
+  .info-con
+    align-self flex-start
+.width-ch20
+  display inline-block
+  width 9ch
 
 </style>

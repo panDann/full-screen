@@ -5,6 +5,18 @@ export default {
 
     },
     showAtmosphere: false,
+    atmosphereMsg: {
+      time: '2019-02-04',
+      day: '周一',
+      lunar: '阴历',
+      realDegree: '27',
+      realState: '27',
+      minDegree: '25',
+      maxDegree: '28',
+      wind: '阴历阴历阴历',
+      state: '阴历阴历阴历',
+      airQuality: '阴历'
+    },
     showAffair: false
   },
   mutations: {
