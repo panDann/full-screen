@@ -27,7 +27,7 @@
     <Tab v-model="currentName" :tab-list="tabList">
       <TabPane name="function">
         <div class="flex-row justify-start">
-          <div class="left-menu flex1">
+          <div class="left-menu primary-padding flex1">
             <div
               v-for="(item,index) in leftMenu"
               :key="item.name"
@@ -40,10 +40,10 @@
             </div>
           </div>
           <div class="right-content flex4">
-            <Security @change="onChange" v-if="currentLeftIndex===0" />
-            <Petition @change="onChange" v-if="currentLeftIndex===1" />
-            <Three @change="onChange" v-if="currentLeftIndex===2" />
-            <Solid @change="onChange" v-if="currentLeftIndex===3" />
+            <Security  class="primary-padding" :list="filterObj['社会治安']" @change="onChange" v-if="currentLeftIndex===0" />
+            <Petition  class="primary-padding" :list="filterObj['信访保障']" @change="onChange" v-if="currentLeftIndex===1" />
+            <Three  class="primary-padding" :list="filterObj['防灾减灾']" @change="onChange" v-if="currentLeftIndex===2" />
+            <Solid  class="primary-padding" :list="filterObj['惠民服务']" @change="onChange" v-if="currentLeftIndex===3" />
           </div>
         </div>
       </TabPane>
@@ -60,7 +60,8 @@ import Three from './components/three'
 import Security from './components/security'
 import Petition from './components/petition'
 import Solid from './components/solid'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
+
 export default {
   components: {
     Tab,
@@ -71,7 +72,7 @@ export default {
     Solid
   },
   computed: {
-    ...mapState(['atmosphereMsg', 'showAtmosphere'])
+    ...mapState(['atmosphereMsg', 'filterObj', 'showAtmosphere'])
   },
   data () {
     return {
@@ -82,17 +83,19 @@ export default {
       leftMenu
     }
   },
-
+  created () {
+    this.actFilterObj()
+  },
   methods: {
     transferTab (key) {
       this.currentName = key
       this.$emit('input', key)
     },
-    // ...mapMutations(['comFilterObj']),
-    ...mapActions(['actPoints']),
+    ...mapMutations(['comFilterIds']),
+    ...mapActions(['actPoints', 'actFilterObj']),
     onChange (currentObj) {
-      console.log(111, currentObj)
-      this.$store.commit('comFilterObj', currentObj)
+      this.comFilterIds(currentObj)
+      this.actPoints()
     }
   }
   // render(h){

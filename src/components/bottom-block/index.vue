@@ -5,7 +5,7 @@
       <i class="iconfont icon-jiantou" :class="isHide?'':'rotate-180'" />
     </div>
     <div class="con flex-row justify-around" :class="isHide?'con-hide':''">
-    <FirstBaseInfo :baseInfo='firstBaseInfo'  class="flex4" />
+    <FirstBaseInfo :baseInfo='firstBaseInfo'  class="flex5" />
     <div class="bar"></div>
 
     <!-- <div style=" align-self:flex-start"  class="flex3">
@@ -24,10 +24,10 @@
         </div>
         <Chart :chartData='statisticData' width='500px' height='250px'/>
     </div> -->
-    <BaseInfo :baseInfo='baseInfo'  class="flex3" />
+    <BaseInfo :baseInfo='baseInfo'  class="flex2" />
 
     <div class="bar"></div>
-    <Event :list='events' class="flex3" />
+    <Event :list='events' class="flex4" />
     <div class="bar"></div>
     <Video :list='video'  class="flex3" />
   </div>

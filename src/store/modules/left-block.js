@@ -1,9 +1,12 @@
 
+import { getLeftMenu } from '@src/api/left-block.js'
+
 export default {
   state: {
     filterObj: {
 
     },
+    filterIds: [],
     showAtmosphere: false,
     atmosphereMsg: {
       time: '2019-02-04',
@@ -21,8 +24,15 @@ export default {
   },
   mutations: {
     comFilterObj (sta, payload) {
-      sta.filterObj = { ...sta.filterObj, ...payload }
+      sta.filterObj = payload
     },
+    comFilterIds (sta, { id, checked }) {
+      const ids = sta.filterIds
+      if (checked)ids.push(id)
+      else ids.splice(ids.findIndex(el => el === id), 1)
+      sta.filterIds = ids
+    },
+
     comShowAtmosphere (sta, payload) {
       sta.showAtmosphere = payload
     },
@@ -31,8 +41,15 @@ export default {
     }
   },
   actions: {
-    actFilterObj ({ commit }) {
-      commit('comFilterObj')
+    async actFilterObj ({ commit }) {
+      const { data: { data = [] } } = await getLeftMenu()
+      const tem = {}
+      data.forEach(el => {
+        tem[el.name] = el.children
+      })
+      console.log(111, tem)
+
+      commit('comFilterObj', tem)
     },
     actShowAtmosphere ({ commit }) {
       commit('comsHowAtmosphere')

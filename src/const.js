@@ -56,33 +56,33 @@ export function calcLabelPosition (pathSet) {
   return [(minLng + maxLng) / 2, (minLat +
     maxLat) / 2]
 }
-export const paintText = ({ text, position, pointType = 'country' }, map) => {
+export const paintText = ({ name, position, id, pointType = 'first' }, map) => {
   const [lng, lat] = position
   var marker = new window.AMap.Marker({
     position,
     // 将 html 传给 content
-    content: `<div class="${pointType}-label font20" data-lng='${lng}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${11}'>${text}</div>`,
+    content: `<div class="${pointType}-label font20" data-lng='${lng}' data-type='${pointType}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}'>${name}</div>`,
     // 以 icon 的 [center bottom] 为原点
     offset: new window.AMap.Pixel(-13, -30)
   })
   marker.setMap(map)
 }
 
-export const paintPoint = ({ name, avatar, gender, age, origin, lng, lat, pointType = 'country' }, map) => {
+export const paintPoint = ({ name = '', headpic = '', sexName = '', age = '', nation = '', lng, lat, pointType = 'point', id }, map) => {
   var marker = new window.AMap.Marker({
     position: [lng, lat],
     // 将 html 传给 content
     content: `<div class="point-con white">
     <div class="point-content point-show flex-row justify-between font14 primary-padding shadow">
-    <img src="${avatar}" alt="" class='point-avatar'> 
+    <img src="${headpic}" alt="" class='point-avatar'> 
     <div>
-      <div class=" font14"><span class="font20">${name}</span> ${gender} | ${age} | ${origin}</div>
+      <div class=" font14"><span class="font20">${name}</span> ${sexName} | ${age} | ${nation}</div>
       <div >经度：${lng}</div>
       <div >纬度：${lat}</div>
     </div>
      
     </div>
-    <div class="${pointType} point-con iconfont font32" data-lng='${lng}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${11}' /> 
+    <div class="${'icon-shequjiaozhengrenyuan'} point-con iconfont font32" data-lng='${lng}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}' data-type='point' /> 
     </div>`,
     // 以 icon 的 [center bottom] 为原点
     offset: new window.AMap.Pixel(-13, -30)

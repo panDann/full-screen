@@ -1,62 +1,42 @@
 
 <template>
   <div class="paddingtb10">
-    <div class="flex-row font14 color-739DFF justify-around">
-      <div>
-        <p>
-          <CheckBox label="水纹监测" />
-        </p>
-        <p>
-          <CheckBox label="地质灾害隐患点" />
-        </p>
-      </div>
-      <div>
-        <p>
-          <CheckBox label="低洼户" />
-        </p>
-        <p>
-          <CheckBox label="转移安置点" />
-        </p>
-      </div>
-    </div>
+      <div class="flex-row-wrap  font14 color-739DFF  justify-start">
+
+                      <p class="width50" v-for="item in list" :key="item.id">
+
+                        <CheckBox
+                          :value='filterIds.includes(item.id)'
+                          :label='item.name'
+                         @change="(value)=>onChange({id:item.id,checked:value})"
+                         />
+
+                        </p>
+
+              </div>
   </div>
 </template>
 
 <script>
 import CheckBox from '@src/components/checkbox'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     CheckBox
   },
   props: {
-    // value: {
-    //   type: String,
-    //   required: true,
-    //   default: ''
-    // },
-    // tabList: {
-    //   type: Array,
-    //   required: true,
-    //   default: () => []
-    // }
-  },
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
-  data () {
-    return {
-      isHide: false,
-      currentName: 'three',
-      currentLeftIndex: 0
+    list: {
+      type: Array,
+      default: () => []
     }
   },
-
+  computed: {
+    ...mapState(['filterIds'])
+  },
   methods: {
-    transferTab (key) {
-      this.currentName = key
-      this.$emit('input', key)
+    onChange (obj) {
+      this.$emit('change', obj)
     }
   }
   // render(h){

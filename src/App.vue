@@ -5,7 +5,8 @@
     <div id="map" class="map"></div>
     <LeftBlock />
     <BottomBlock />
-    <Seletor class="selector" @change="onChange" />
+    <Seletor class="selector"  />
+    <!-- <Seletor class="selector" @change="onChange" /> -->
   </div>
 </template>
 <script>
@@ -16,12 +17,12 @@ import Seletor from '@src/components/selector/index.vue'
 import { mapState, mapActions } from 'vuex'
 
 import {
-  resize,
-  paintText,
-  calcLabelPosition,
-  paintPolygon,
-  paintPoint
+  resize
 } from './const'
+
+import {
+  levelZoomMap
+} from './config'
 export default {
   components: {
     LeftBlock,
@@ -31,6 +32,7 @@ export default {
   computed: {
     ...mapState([
       'zoom',
+      'map',
       'points',
       'loading',
       'firstNetworkData',
@@ -42,14 +44,14 @@ export default {
   data () {
     return {
       headerPng,
-
       classObj: {
         transform: 'scale(1)'
-      },
-      map: null
+      }
     }
   },
-  created () {},
+  created () {
+
+  },
   mounted () {
     this.init()
     this.classObj = resize()
@@ -58,10 +60,13 @@ export default {
     })
     const _this = this
     window.addEventListener('click_point', function (event) {
-      _this.map.setZoom(14)
-      const { lng, lat } = event.msg
+      const { lng, lat, type, id } = event.msg
+      // _this.$store.dispatch('actFirstNetworkData', { id })
+      // _this.$store.dispatch('actVideo', { id })
+      _this.$store.dispatch('actFirstBaseInfo', { id })
+      _this.$store.dispatch('actBaseInfo', { id })
       _this.map.setCenter([lng, lat])
-      _this.map.setZoom(13)
+      _this.map.setZoom(levelZoomMap.get(type))
     })
   },
   destroyed () {
@@ -69,32 +74,24 @@ export default {
     window.removeEventListener('click_point')
   },
   methods: {
+    ...mapActions([
+      'actFirstNetworkData'
+    ]),
     init () {
-      this.map = new window.AMap.Map('map', {
+      const map = new window.AMap.Map('map', {
         showLabel: false,
         center: [110.892384, 21.84279],
         zoom: 11,
         mapStyle: 'amap://styles/680b7e9dc654ed22c25c9a3788bfd3aa'
       })
-      // this.map.on('click', this.zoomEnd)
-
-      this.firstNetworkData.forEach(el => {
-        paintPolygon(el.path, this.map)
-        paintText({ text: el.name, position: calcLabelPosition(el.path) }, this.map)
-      })
-      this.points.forEach(el => {
-        paintPoint(el, this.map)
-      })
+      map.on('zoomend', this.zoomEnd)
+      this.$store.commit('comMap', map)
+      this.actFirstNetworkData()
     },
-    ...mapActions([
-      'actFirstNetworkData',
-      'actSecondNetworkData',
-      'actThirdNetworkData',
-      'actForthNetworkData'
-    ]),
-    onChange () {},
+
+    // onChange () {},
     zoomEnd (e) {
-      console.log(e)
+      console.log(this.map.getZoom())
     }
   }
 }

@@ -8,6 +8,9 @@
 html {
     font-family:$primaryFamily
 }
+
+.width50
+    width 50%
 // full-screen start
 .select 
     padding: 5px
@@ -44,9 +47,9 @@ html {
 .bottom-line
     border-bottom: solid 1px $tabBorderColor
 
-.country-label
+.first-label
     color #ffeb3b
-.country-label:hover
+.first-label:hover
     color $primaryColor
 .pointer
     cursor pointer
@@ -54,6 +57,7 @@ html {
 
 .point-con
     position relative
+    z-index $pointIndex
     // text-align: center
     .point-avatar
         width:40px;
@@ -70,6 +74,7 @@ html {
         margin: 10px 0
         border-radius: 4px
         line-height: 24px
+        z-index $pointContentIndex
         background #041149
         //  linear-gradient(180deg,$linearBgTop,$linearBgMiddle,$linearBgBottom);
 

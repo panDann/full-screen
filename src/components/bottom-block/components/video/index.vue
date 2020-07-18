@@ -19,7 +19,6 @@ export default {
     // },
     url: {
       type: String,
-      required: true,
       default: '111'
     }
   }

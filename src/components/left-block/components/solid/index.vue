@@ -1,24 +1,39 @@
 
 <template>
   <div class="paddingtb10">
-    <div class="flex-row font14 color-739DFF justify-around">
-      <div>
-        <p>
-          <CheckBox  @change="(value)=>onChange({type:value})"  label="重要出入口监控" />
-        </p>
-      </div>
-    </div>
+      <div class="flex-row-wrap  font14 color-739DFF  justify-start">
+
+                      <p class="width50" v-for="item in list" :key="item.id">
+
+                        <CheckBox
+                          :value='filterIds.includes(item.id)'
+                          :label='item.name'
+                         @change="(value)=>onChange({id:item.id,checked:value})"
+                         />
+
+                        </p>
+
+              </div>
   </div>
 </template>
 
 <script>
 import CheckBox from '@src/components/checkbox'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     CheckBox
   },
-
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    }
+  },
+  computed: {
+    ...mapState(['filterIds'])
+  },
   methods: {
     onChange (obj) {
       this.$emit('change', obj)

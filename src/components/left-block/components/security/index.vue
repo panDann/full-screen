@@ -1,37 +1,38 @@
 
 <template>
   <div class="paddingtb10">
-    <div class="flex-row font14 color-739DFF justify-around">
-      <div>
-        <p>
-          <CheckBox @change="(value)=>onChange({type:value})" label="刑事前科人员" />
-        </p>
-        <p>
-          <CheckBox @change="(value)=>onChange({type:value})" label="社区纠正人员" />
-        </p>
-        <p>
-          <CheckBox @change="(value)=>onChange({type:value})" label="涉黑涉恶人员" />
-        </p>
+      <div class="flex-row-wrap  font14 color-739DFF  justify-start">
 
-      </div>
-      <div>
-        <p>
-          <CheckBox @change="(value)=>onChange({type:value})" label="邢释人员" />
-        </p>
-        <p>
-          <CheckBox @change="(value)=>onChange({type:value})" label="吸毒人员" />
-        </p>
-      </div>
-    </div>
+                      <p class="width50" v-for="item in list" :key="item.id">
+
+                        <CheckBox
+                          :value='filterIds.includes(item.id)'
+                          :label='item.name'
+                         @change="(value)=>onChange({id:item.id,checked:value})"
+                         />
+
+                        </p>
+
+              </div>
   </div>
 </template>
 
 <script>
 import CheckBox from '@src/components/checkbox'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     CheckBox
+  },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    }
+  },
+  computed: {
+    ...mapState(['filterIds'])
   },
   methods: {
     onChange (obj) {

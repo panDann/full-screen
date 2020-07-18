@@ -1,4 +1,6 @@
 
+import { getMonitorInfo, getPeopleInfo, getGridMsg } from '@src/api/map.js'
+
 export default {
   state: {
     baseInfo: {
@@ -35,6 +37,9 @@ export default {
     comBaseInfo (sta, payload) {
       sta.baseInfo = payload
     },
+    comFirstBaseInfo (sta, payload) {
+      sta.firstBaseInfo = payload
+    },
     comStatisticData (sta, payload) {
       sta.statisticData = payload
     },
@@ -47,8 +52,14 @@ export default {
   },
 
   actions: {
-    actBaseInfo ({ commit }) {
-      commit('comBaseInfo')
+    async actBaseInfo ({ commit }, { id }) {
+      const { data: { data } } = await getGridMsg(id)
+      commit('comBaseInfo', data)
+    },
+    async actFirstBaseInfo ({ commit }, { id }) {
+      const { data: { data } } = await getPeopleInfo(id)
+
+      commit('comFirstBaseInfo', data)
     },
     actStatisticData ({ commit }) {
       commit('comStatisticData')
@@ -56,8 +67,11 @@ export default {
     actEvents ({ commit }) {
       commit('comEvents')
     },
-    actVideo ({ commit }) {
-      commit('comVideo')
+    async actVideo ({ commit }, { id }) {
+      const res = await getMonitorInfo(id)
+      console.log('监控', res)
+
+      // commit('comVideo')
     }
   }
 }

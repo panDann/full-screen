@@ -3,13 +3,13 @@
     <div class="base-con">
      <div class=" white margintb10">基本信息</div>
      <div class="content flex-row justify-start">
-        <img :src="baseInfo.avatar" class="avatar" alt="">
+        <img :src="baseInfo.headpic" class="avatar" alt="">
         <div class=" info-con">
             <div>{{baseInfo.name}}</div>
-            <div>{{baseInfo.gender}} | {{baseInfo.age}} | {{baseInfo.origin}} | {{baseInfo.academic}} | {{baseInfo.belong}}</div>
-            <div><span class="width-ch20">联系电话：</span> {{baseInfo.phone}} &nbsp;&nbsp;&nbsp; 身份证号： {{baseInfo.idCard}}</div>
+            <div>{{baseInfo.sexName}} | {{calcAge(baseInfo.birthday)}} | {{baseInfo.nation}} | {{baseInfo.education}} | {{baseInfo.partyName}}</div>
+            <div ><span class="width-ch20">联系电话：</span> {{baseInfo.mobile}} <span class="3ch" ></span>   身份证号： {{baseInfo.uid}}</div>
             <div><span class="width-ch20">住址：</span>{{baseInfo.address}}</div>
-            <div><span class="width-ch20">简介：</span>{{baseInfo.introduction}}</div>
+            <div><span class="width-ch20">简介：</span>{{baseInfo.postName}}</div>
         </div>
      </div>
     </div>
@@ -28,8 +28,13 @@ export default {
       required: true,
       default: () => ({})
     }
-  }
+  },
 
+  methods: {
+    calcAge (birthday) {
+      return new Date().getFullYear() - new Date(birthday).getFullYear()
+    }
+  }
   // render(h){
   //     return
   // }
@@ -45,7 +50,7 @@ export default {
   font-size:13px;
   font-weight:500;
   color:rgba(147,205,255,1);
-  line-height:20px
+  line-height:40px
   .avatar
     width:74px;
     height:83px;
@@ -57,5 +62,7 @@ export default {
 .width-ch20
   display inline-block
   width 9ch
-
+.3ch
+  display inline-block
+  width 3ch
 </style>

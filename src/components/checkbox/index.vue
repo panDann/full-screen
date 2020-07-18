@@ -1,7 +1,7 @@
 
 <template>
 <div class="con" @click="currentValue=!currentValue,$emit('input',currentValue),$emit('change',currentValue)">
-  <button class="box" :class="currentValue&&'checked icon-duoxuankuang  iconfont '"></button>
+  <div class="iconfont checked" :class="currentValue?'icon-duoxuankuang1':'icon-weixuanzhongzhuangtai   '"></div>
   <label class="label">{{label}}</label>
 </div>
 </template>
@@ -18,10 +18,10 @@ export default {
       default: 'chekcbox'
     }
   },
-  model: {
-    prop: 'value',
-    event: 'input'
-  },
+  // model: {
+  //   prop: 'value',
+  //   event: 'input'
+  // },
   data () {
     return {
       currentValue: this.value

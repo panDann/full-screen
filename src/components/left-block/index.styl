@@ -1,13 +1,15 @@
 
 $arrowSize = 24px
+$conWidth = 450px
 minus(a)
     a / 1.05
+
 .con
     position absolute
     top: $headerImgOffset
     left $floatBoxMargin
     height $leftHeight
-    width: 400px
+    width: $conWidth
     // overflow hidden
     transition: left .2s linear
     z-index $leftBoxIndex
@@ -77,7 +79,7 @@ minus(a)
         align-self: flex-start  
         padding-left: 10px  
 .con-hide
-    left -400px
+    left negative($conWidth)
     padding: 0
     
         
