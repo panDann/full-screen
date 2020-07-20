@@ -14,7 +14,7 @@
               <span class="warning-title">雪亮应用</span>
               <div class="flex-row-wrap  font14 color-739DFF  justify-start">
 
-                      <p class="width50" v-for="item in list" :key="item.id">
+                      <p class="width50" v-for="item in subCheckList" :key="item.id">
                         <CheckBox
                           :value='filterIds.includes(item.id)'
                           :label='item.name'
@@ -49,7 +49,10 @@ export default {
     TabPane
   },
   computed: {
-    ...mapState(['filterIds'])
+    ...mapState(['filterIds']),
+    subCheckList () {
+      return this.list[0].children[2].children
+    }
   },
   props: {
     list: {
@@ -61,13 +64,14 @@ export default {
     return {
       isHide: false,
       currentName: 'three',
-      currentLeftIndex: 0,
       subTabList
     }
   },
 
   methods: {
     onChange (obj) {
+      console.log(this.list)
+
       this.$emit('change', obj)
     },
     tranferShowAtmosphere () {

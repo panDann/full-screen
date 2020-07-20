@@ -17,16 +17,6 @@ export default {
     map: null,
     loading: false,
     points: [
-      {
-        name: '111',
-        gender: '111',
-        age: '111',
-        origin: '111',
-        lng: 111.057385,
-        lat: 21.914163,
-        pointType: 'icon-yonghu'
-      }
-
     ],
     firstNetworkData: [
       // {
@@ -154,9 +144,9 @@ export default {
     comMap (sta, payload) {
       sta.map = payload
     },
-    comLoading (sta, payload) {
-      sta.loading = payload
-    },
+    // comLoading (sta, payload) {
+    //   sta.loading = payload
+    // },
     comPoints (sta, payload) {
       sta.points = payload
     },
@@ -174,23 +164,22 @@ export default {
     }
   },
   actions: {
-    async actPoints ({ commit, state: { filterIds, map } }) {
-      commit('comLoading', true)
+    async actPoints ({ commit, state: { filterIds, map, points } }) {
+      map.remove(points)
       const { data: { data = [] } } = await getPoints(filterIds.join(','))
-      data.forEach(el => {
-        paintPoint({ ...el, lng: el.longitude, lat: el.latitude }, map)
+
+      const cachePoints = data.map(el => {
+        return paintPoint({ ...el, lng: el.longitude, lat: el.latitude }, map)
       })
-      commit('comLoading', false)
+
+      commit('comPoints', cachePoints)
     },
     async actFirstNetworkData ({ commit, state: { map } }, obj) {
-      commit('comLoading', true)
-
       const { data: { data = [] } } = await getNetworkPosition(obj ? obj.id : '')
       const temPath = []
       data.forEach(el => {
         let locStrArr = []
         locStrArr = el.locStr.replace(/\],/g, ']$').split('$')
-
         temPath.push({
           id: el.id,
           name: el.name,
@@ -205,7 +194,6 @@ export default {
         paintPolygon(el.path, map)
         paintText({ name: el.name, id: el.id, position: calcLabelPosition(el.path) }, map)
       })
-      commit('comLoading', false)
     },
     actSecondNetworkData ({ commit }) {
       commit('comSecondNetworkData')

@@ -1,7 +1,7 @@
 
 <template>
 <div class="con" @click="currentValue=!currentValue,$emit('input',currentValue),$emit('change',currentValue)">
-  <div class="iconfont checked" :class="currentValue?'icon-duoxuankuang1':'icon-weixuanzhongzhuangtai   '"></div>
+  <div class="iconfont checked" :class="currentValue?'icon-duoxuankuang1':'icon-weixuanzhong'"></div>
   <label class="label">{{label}}</label>
 </div>
 </template>

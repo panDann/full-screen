@@ -7,7 +7,7 @@
         <div class=" info-con">
             <div>{{baseInfo.name}}</div>
             <div>{{baseInfo.sexName}} | {{calcAge(baseInfo.birthday)}} | {{baseInfo.nation}} | {{baseInfo.education}} | {{baseInfo.partyName}}</div>
-            <div ><span class="width-ch20">联系电话：</span> {{baseInfo.mobile}} <span class="3ch" ></span>   身份证号： {{baseInfo.uid}}</div>
+            <div ><span class="width-ch20">联系电话：</span> {{baseInfo.mobile}} <span class="paddinglr1rem" >身份证号： {{baseInfo.uid}}</span>   </div>
             <div><span class="width-ch20">住址：</span>{{baseInfo.address}}</div>
             <div><span class="width-ch20">简介：</span>{{baseInfo.postName}}</div>
         </div>
@@ -18,11 +18,6 @@
 <script>
 export default {
   props: {
-    // value: {
-    //   type: String,
-    //   required: true,
-    //   default: ''
-    // },
     baseInfo: {
       type: Object,
       required: true,

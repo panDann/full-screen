@@ -1,6 +1,5 @@
 <template>
   <div id="app" ref="app" :style="classObj">
-    <div class="loading" v-show="loading"></div>
     <img :src="headerPng" alt class="header-img" />
     <div id="map" class="map"></div>
     <LeftBlock />
@@ -18,10 +17,11 @@ import { mapState, mapActions } from 'vuex'
 
 import {
   resize
+
 } from './const'
 
 import {
-  levelZoomMap
+  levelZoomMap, initZoom
 } from './config'
 export default {
   components: {
@@ -49,9 +49,7 @@ export default {
       }
     }
   },
-  created () {
 
-  },
   mounted () {
     this.init()
     this.classObj = resize()
@@ -60,18 +58,21 @@ export default {
     })
     const _this = this
     window.addEventListener('click_point', function (event) {
-      const { lng, lat, type, id } = event.msg
-      // _this.$store.dispatch('actFirstNetworkData', { id })
-      // _this.$store.dispatch('actVideo', { id })
-      _this.$store.dispatch('actFirstBaseInfo', { id })
+      const { lng, lat, pointtype, id, zoomtype } = event.msg
+      _this.$store.dispatch('actFirstNetworkData', { id })
+      // console.log(333, pointtype, zoomtype)
+      if (!pointtype || pointtype === '1') {
+        _this.$store.dispatch('actFirstBaseInfo', { id })
+        _this.$store.commit('comVideo', null)
+      } else {
+        _this.$store.dispatch('actFirstBaseInfo', { id })
+        _this.$store.dispatch('actVidoe', { id })
+      }
       _this.$store.dispatch('actBaseInfo', { id })
+
       _this.map.setCenter([lng, lat])
-      _this.map.setZoom(levelZoomMap.get(type))
+      _this.map.setZoom(levelZoomMap.get(zoomtype))
     })
-  },
-  destroyed () {
-    window.removeEventListener('resize')
-    window.removeEventListener('click_point')
   },
   methods: {
     ...mapActions([
@@ -80,9 +81,10 @@ export default {
     init () {
       const map = new window.AMap.Map('map', {
         showLabel: false,
-        center: [110.892384, 21.84279],
-        zoom: 11,
+        center: [110.907907, 21.939376],
+        zoom: initZoom,
         mapStyle: 'amap://styles/680b7e9dc654ed22c25c9a3788bfd3aa'
+        // mapStyle: 'amap://styles/680b7e9dc654ed22c25c9a3788bfd3aa'
       })
       map.on('zoomend', this.zoomEnd)
       this.$store.commit('comMap', map)

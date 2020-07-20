@@ -1,10 +1,10 @@
-export const initZoom = 11
+export const initZoom = 12
 export const levelZoomMap = new Map([
-  ['first', 13],
-  ['second', 14],
-  ['third', 15],
-  ['forth', 16],
-  ['point', 16]
+  ['first', 12],
+  ['second', 13],
+  ['third', 14],
+  ['forth', 15],
+  ['point', 15]
 ])
 
 // http://132.122.1.208:7000/swagger-ui.html

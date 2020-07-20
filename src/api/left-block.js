@@ -9,3 +9,7 @@ export const getLeftMenu = () => {
 export const getPoints = (ids) => {
   return Server(`index/itemsByIds?ids=${ids}`, null, { method: 'get' })
 }
+
+export const getAtmosphere = () => {
+  return Server('https://tianqiapi.com/api?version=v6&appid=95783386&appsecret=dV10BSiY&cityid=101282002', null, { method: 'get' })
+}

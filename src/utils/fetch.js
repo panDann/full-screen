@@ -3,7 +3,11 @@
  */
 import axios from 'axios'
 import config from '../config'
+const loadingEl = document.getElementById('global-loading')
 
+const $loading = (isShow) => {
+  loadingEl.style.visibility = isShow ? 'visible' : 'hidden'
+}
 /* eslint-disable prefer-promise-reject-errors */
 const instance = axios.create({
   method: 'post',
@@ -12,10 +16,20 @@ const instance = axios.create({
     'Content-Type': 'application/json'
   }
 })
+instance.interceptors.response.use(function (res) {
+  $loading(false)
 
-const Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUwMzkzMjEyMjYiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTUwNzUzMjEsImFjY291bnQiOiJhZG1pbiJ9.89IzYA5Z0L3rlVOr2mGbt5Xpj3YZKG55SEr_M0qH05E'
+  return res
+}, (err) => {
+  if (err) {
+    console.log('网络请求出错，联系管理员')
+  }
+})
+
+const Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUyMDY1NDQ3MjMiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTUyNDI1NDQsImFjY291bnQiOiJhZG1pbiJ9.mbKECMEJFC5cYodyjz5r7j6nm-RANkrGKAc92NEfnw0'
 
 export default async (url = '', params, option = {}) => {
+  $loading(true)
   if (!url) {
     return Promise.reject('params \'url\' not exist！')
   }

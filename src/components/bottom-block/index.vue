@@ -29,7 +29,7 @@
     <div class="bar"></div>
     <Event :list='events' class="flex4" />
     <div class="bar"></div>
-    <Video :list='video'  class="flex3" />
+    <Video :videoMsg='video'  v-if="video" class="flex3" />
   </div>
 </div>
 </template>

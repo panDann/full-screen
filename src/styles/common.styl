@@ -11,6 +11,7 @@ html {
 
 .width50
     width 50%
+
 // full-screen start
 .select 
     padding: 5px
@@ -82,3 +83,16 @@ html {
     .point-show
         visibility visible
         
+.loading
+    position fixed
+    top: 10px
+    right 10px
+
+    height 20px
+    width:  20px
+    visibility: hidden
+    border-radius: 100%
+    border solid 2px $primaryColor
+    z-index: 999
+    border-bottom: none
+    animation: loading linear infinite .3s

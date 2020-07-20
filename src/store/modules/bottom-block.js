@@ -9,17 +9,6 @@ export default {
       phone: '333'
     },
     firstBaseInfo: {
-      avatar: '1111',
-      name: '1111',
-      gender: '1111',
-      age: '1111',
-      origin: '1111',
-      academic: '1111',
-      belong: '1111',
-      phone: '1111',
-      idCard: '1111',
-      address: '1111',
-      introduction: '1111'
     },
     // statisticData: {
     //   xAxisData: [11, 33],
@@ -31,7 +20,7 @@ export default {
         time: '2019'
       }
     ],
-    video: ''
+    video: null
   },
   mutations: {
     comBaseInfo (sta, payload) {
@@ -47,7 +36,7 @@ export default {
       sta.events = payload
     },
     comVideo (sta, payload) {
-      sta.events = payload
+      sta.video = payload
     }
   },
 
@@ -58,7 +47,6 @@ export default {
     },
     async actFirstBaseInfo ({ commit }, { id }) {
       const { data: { data } } = await getPeopleInfo(id)
-
       commit('comFirstBaseInfo', data)
     },
     actStatisticData ({ commit }) {
@@ -67,11 +55,10 @@ export default {
     actEvents ({ commit }) {
       commit('comEvents')
     },
-    async actVideo ({ commit }, { id }) {
-      const res = await getMonitorInfo(id)
-      console.log('监控', res)
-
-      // commit('comVideo')
+    async actVidoe ({ commit }, { id }) {
+      const { data: { data } } = await getMonitorInfo(id)
+      commit('comVideo', data)
+      console.log('actVidoe', data)
     }
   }
 }
