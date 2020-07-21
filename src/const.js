@@ -60,7 +60,7 @@ export const paintText = ({ name, position, id, menuCode, pointType = 'first' },
   var marker = new window.AMap.Marker({
     position,
     // 将 html 传给 content
-    content: `<div class="${pointType}-label font20" data-lng='${lng}' data-zoomtype='${pointType}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}'>${name}</div>`,
+    content: `<div class="${pointType}-label font20" data-lng='${lng}' data-pointtype='networkPoint' data-zoomtype='${pointType}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}'>${name}</div>`,
     // 以 icon 的 [center bottom] 为原点
     offset: new window.AMap.Pixel(-13, -30)
   })

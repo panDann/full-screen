@@ -4,7 +4,7 @@
     <div class="arrow" @click="isHide=!isHide">
       <i class="iconfont icon-jiantou-copy" :class="isHide?'':'rotate-180'" />
     </div>
-    <Atmosphere :atmosphereMsg='atmosphereMsg' v-show="showAtmosphere" />
+    <Atmosphere :atmosphereMsg='atmosphereMsg'  v-show="showAtmosphere"  />
 
     <Tab v-model="currentName" :tab-list="tabList">
       <TabPane name="function">
@@ -56,11 +56,8 @@ export default {
     Solid
   },
   computed: {
-    ...mapState(['atmosphereMsg', 'filterObj', 'showAtmosphere']),
-    showAtmosphereListen () {
-      console.log(this.showAtmosphere)
-      return this.showAtmosphere
-    }
+    ...mapState(['atmosphereMsg', 'filterObj', 'showAtmosphere'])
+
   },
   data () {
     return {
@@ -80,12 +77,13 @@ export default {
       this.currentName = key
       this.$emit('input', key)
     },
-    ...mapMutations(['comFilterIds']),
-    ...mapActions(['actPoints', 'actShowAtmosphere', 'actFilterObj']),
+    ...mapMutations(['comFilterIds', 'comShowAtmosphere']),
+    ...mapActions(['actPoints', 'actFilterObj', 'actShowAtmosphere']),
     onChange (currentObj) {
       this.comFilterIds(currentObj)
       this.actPoints()
     }
+
   }
   // render(h){
   //     return

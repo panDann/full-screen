@@ -2,9 +2,9 @@
 <template>
     <Tab v-model="currentName" :tab-list="subTabList">
       <TabPane name="three">
-          <div class="flex-row bottom-line paddingtb10 pointer justify-between" @click="tranferShowAtmosphere">
+          <div class="flex-row bottom-line paddingtb10 pointer justify-between"  @click="transferAtmosphere(showAtmosphere)" >
               <span class="warning-title">气象信息</span>
-              <i class="iconfont font32 paddinglr1rem  icon-tianqi" :class="isHide?'primary-color':'second-color'" />
+              <i class="iconfont font32 paddinglr1rem  icon-tianqi" :class="showAtmosphere?'primary-color':'second-color'"/>
           </div>
           <div class="flex-row bottom-line paddingtb10 justify-between">
               <span class="warning-title">会务研判</span>
@@ -49,7 +49,7 @@ export default {
     TabPane
   },
   computed: {
-    ...mapState(['filterIds']),
+    ...mapState(['filterIds', 'showAtmosphere']),
     subCheckList () {
       return this.list[0].children[2].children
     }
@@ -74,8 +74,10 @@ export default {
 
       this.$emit('change', obj)
     },
-    tranferShowAtmosphere () {
-      this.$store.commit('comShowAtmosphere', this.isHide = !this.isHide)
+    transferAtmosphere (value) {
+      console.log(222)
+
+      this.$store.commit('comShowAtmosphere', !value)
     }
   }
   // render(h){

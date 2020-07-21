@@ -4,7 +4,7 @@
     <div id="map" class="map"></div>
     <LeftBlock />
     <BottomBlock />
-    <Seletor class="selector"  />
+    <Seletor class="selector"  @click.native="login" />
     <!-- <Seletor class="selector" @change="onChange" /> -->
   </div>
 </template>
@@ -14,7 +14,7 @@ import LeftBlock from '@src/components/left-block/index.vue'
 import BottomBlock from '@src/components/bottom-block/index.vue'
 import Seletor from '@src/components/selector/index.vue'
 import { mapState, mapActions } from 'vuex'
-
+import { login } from '@src/api/left-block.js'
 import {
   resize
 
@@ -33,12 +33,7 @@ export default {
     ...mapState([
       'zoom',
       'map',
-      'points',
-      'loading',
-      'firstNetworkData',
-      'secondNetworkData',
-      'thirdNetworkData',
-      'forthNetworkData'
+      'points'
     ])
   },
   data () {
@@ -59,24 +54,28 @@ export default {
     const _this = this
     window.addEventListener('click_point', function (event) {
       const { lng, lat, pointtype, id, zoomtype } = event.msg
-      _this.$store.dispatch('actFirstNetworkData', { id })
-      // console.log(333, pointtype, zoomtype)
-      if (!pointtype || pointtype === '1') {
-        _this.$store.dispatch('actFirstBaseInfo', { id })
-        _this.$store.commit('comVideo', null)
-      } else {
-        _this.$store.dispatch('actFirstBaseInfo', { id })
-        _this.$store.dispatch('actVidoe', { id })
-      }
-      _this.$store.dispatch('actBaseInfo', { id })
+      // 基本信息
+      _this.$store.dispatch('actFirstBaseInfo', { id })
 
+      switch (pointtype) {
+        case '1': _this.$store.commit('comVideo', null)
+          break
+        case '2': _this.$store.dispatch('actVidoe', { id })
+          break
+          // 子网格坐标点
+        case 'networkPoint': _this.$store.dispatch('actNetworkData', { id })
+          break
+        default:break
+      }
+      // 网格信息
+      _this.$store.dispatch('actBaseInfo', { id })
       _this.map.setCenter([lng, lat])
       _this.map.setZoom(levelZoomMap.get(zoomtype))
     })
   },
   methods: {
     ...mapActions([
-      'actFirstNetworkData'
+      'actNetworkData'
     ]),
     init () {
       const map = new window.AMap.Map('map', {
@@ -88,12 +87,16 @@ export default {
       })
       map.on('zoomend', this.zoomEnd)
       this.$store.commit('comMap', map)
-      this.actFirstNetworkData()
+      this.actNetworkData()
     },
 
     // onChange () {},
     zoomEnd (e) {
       console.log(this.map.getZoom())
+    },
+    async login () {
+      const res = await login()
+      console.log(res)
     }
   }
 }

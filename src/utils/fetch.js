@@ -18,15 +18,14 @@ const instance = axios.create({
 })
 instance.interceptors.response.use(function (res) {
   $loading(false)
-
   return res
 }, (err) => {
   if (err) {
-    console.log('网络请求出错，联系管理员')
+    // alert('网络请求出错，联系管理员')
   }
 })
 
-const Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUyMDY1NDQ3MjMiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTUyNDI1NDQsImFjY291bnQiOiJhZG1pbiJ9.mbKECMEJFC5cYodyjz5r7j6nm-RANkrGKAc92NEfnw0'
+const Authorization = localStorage.token || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUzMjM5NDkxOTEiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTUzNTk5NDksImFjY291bnQiOiJhZG1pbiJ9.6M7wDZpFGm-iJ5KqhXM9gMrkHcJFeg-rC0_uet5ylCg'
 
 export default async (url = '', params, option = {}) => {
   $loading(true)
