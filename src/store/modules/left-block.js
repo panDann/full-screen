@@ -44,9 +44,11 @@ export default {
       else ids.splice(ids.findIndex(el => el === id), 1)
       sta.filterIds = ids
     },
-
     comShowAtmosphere (sta, payload) {
       sta.showAtmosphere = payload
+    },
+    comAtmosphereMsg (sta, payload) {
+      sta.atmosphereMsg = payload
     },
     comShowAffair (sta, payload) {
       sta.showAffair = payload
@@ -64,10 +66,10 @@ export default {
       commit('comFilterObj', tem)
     },
     async actShowAtmosphere ({ commit }) {
-      const { data } = await getAtmosphere()
+      const { data: { data } } = await getAtmosphere()
       console.log(333, data)
 
-      commit('comsHowAtmosphere')
+      commit('comAtmosphereMsg', data)
     },
     actShowAffair ({ commit }) {
       commit('comShowAffair')

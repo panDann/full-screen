@@ -18,6 +18,7 @@ const instance = axios.create({
 })
 instance.interceptors.response.use(function (res) {
   $loading(false)
+
   return res
 }, (err) => {
   if (err) {
@@ -25,7 +26,7 @@ instance.interceptors.response.use(function (res) {
   }
 })
 
-const Authorization = localStorage.token || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUzMjM5NDkxOTEiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTUzNTk5NDksImFjY291bnQiOiJhZG1pbiJ9.6M7wDZpFGm-iJ5KqhXM9gMrkHcJFeg-rC0_uet5ylCg'
+const Authorization = localStorage.token || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFtcCI6IjE1OTUzNzcxMTIxODYiLCJhZG1pbiI6IjEiLCJleHAiOjE1OTU0MTMxMTIsImFjY291bnQiOiJhZG1pbiJ9.gnOVFj1MDQfhosIIQCXgEdpFUfKNbAZ-Uyb9W3lUW0s'
 
 export default async (url = '', params, option = {}) => {
   $loading(true)

@@ -2,6 +2,7 @@
 import { getNetworkPosition } from '@src/api/map.js'
 
 import { getPoints } from '@src/api/left-block.js'
+import { levelColorMap, levelZoomMap } from '@src/config.js'
 
 import {
 
@@ -58,11 +59,14 @@ export default {
     async actNetworkData ({ state: { map } }, obj) {
       const { data: { data = [] } } = await getNetworkPosition(obj ? obj.id : '')
       const temPath = []
-      data.forEach(({ id, name, locStr }) => {
+      let initLevel = 13
+      data.forEach(({ id, name, level, locStr }) => {
+        initLevel = level
         let locStrArr = []
         locStrArr = locStr.replace(/\],/g, ']$').split('$')
         temPath.push({
           id,
+          level,
           name,
           path: locStrArr.map(item => {
             const [lng, lat] = item.replace(/(\[|\])/g, '').split(',')
@@ -71,9 +75,12 @@ export default {
         })
       })
       // const { state: { map } } = obj
-      temPath.forEach(el => {
-        paintPolygon(el.path, map)
-        paintText({ name: el.name, id: el.id, position: calcLabelPosition(el.path) }, map)
+      console.log(111, levelZoomMap.get(initLevel))
+
+      map.setZoom(levelZoomMap.get(initLevel))
+      temPath.forEach(({ path, id, name, level }) => {
+        paintPolygon(path, map, levelColorMap.get(level))
+        paintText({ name: name, id: id, position: calcLabelPosition(path) }, map, levelColorMap.get(level))
       })
     }
     // actSecondNetworkData ({ commit }) {

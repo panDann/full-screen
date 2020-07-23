@@ -1,11 +1,11 @@
 
 import Server from '@src/utils/fetch.js'
 
+const form = new FormData()
+form.append('account', 'admin')
+form.append('password', 'Eshore#ES_2020')
 export const login = () => {
-  return Server('auth/login', JSON.stringify({
-    account: 'admin',
-    password: 'Eshore#ES_2020'
-  }), { method: 'post' })
+  return Server('auth/login', form, { method: 'post' })
 }
 
 export const getLeftMenu = () => {

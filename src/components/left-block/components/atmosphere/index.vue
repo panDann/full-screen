@@ -4,7 +4,7 @@
       <div class="top">
         <span>{{atmosphereMsg.date}}</span>
         <span class="day">{{atmosphereMsg.week}}</span>
-        <span>{{atmosphereMsg.lunar}}</span>
+        <span>{{atmosphereMsg.date_lunar}}</span>
           </div>
       <div class="flex-row middle">
         <i class="icon-tianqi1 iconfont font32" />

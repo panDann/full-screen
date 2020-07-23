@@ -2,7 +2,7 @@
 $arrowSize = 24px
 $conWidth = 450px
 minus(a)
-    a / 1.09
+    a / 1.12
 
 .con
     position absolute
@@ -13,25 +13,28 @@ minus(a)
     // overflow hidden
     transition: left .2s linear
     z-index $leftBoxIndex
-    padding: $primaryPadding
-    
-    background:linear-gradient(180deg,$linearBgTop,$linearBgMiddle,$linearBgBottom);
-    box-shadow:$primaryBoxShadow;
-    border-radius:2px 2px 0px 12px;
-    border:1px solid rgba(51,183,255,1);
+    padding: $primaryPadding 
+    padding-right: 2rem
+    background-image: url('~@src/assets/left-bg.png')
+    background-size: 100% 100%
+    background-repeat: no-repeat
+    // background:linear-gradient(180deg,$linearBgTop,$linearBgMiddle,$linearBgBottom);
+    // box-shadow:$primaryBoxShadow;
+    // border-radius:2px 2px 0px 12px;
+    // border:1px solid rgba(51,183,255,1);
     .arrow
         position absolute
-        right -30px
-        top: 45%
+        right: 17px;
+        top: 46.5%;
         bottom: 0
         height 50px
         width: 30px
         text-align: center
         color $primaryColor
         line-height: 50px
-        background rgba(0,72,240,0.6)
-        border-radius:0 10% 10% 0;
-        box-shadow:$primaryBoxShadow;
+        // background rgba(0,72,240,0.6)
+        // border-radius:0 10% 10% 0;
+        // box-shadow:$primaryBoxShadow;
     
     .left-menu
         height minus($leftHeight)
@@ -50,7 +53,11 @@ minus(a)
         align-self: flex-start  
         padding-left: 10px  
 .con-hide
-    left negative($conWidth)
+    // left negative($conWidth)
+    width 0 
+    overflow hidden
     padding: 0
-    
+    padding-left: 1rem
+    .arrow
+        right: -7px;
         

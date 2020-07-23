@@ -12,10 +12,10 @@ export const resize = () => {
   }
 }
 
-export function paintPolygon (path, map) {
+export function paintPolygon (path, map, strokeColor) {
   var polygon = new window.AMap.Polygon({
     path,
-    strokeColor: '#ffeb3b',
+    strokeColor,
     strokeWeight: 2,
     strokeOpacity: 0.9,
     fillOpacity: 0,
@@ -25,9 +25,17 @@ export function paintPolygon (path, map) {
   })
   polygon.setMap(map)
 }
-var myEvent = new CustomEvent('click_point', {
-  detail: null
-})
+
+var myEvent = new window.Event('click_point')
+// if (document.createEventObject) {
+
+//   myEvent = document.createEventObject('click_point')
+// } else {
+//   myEvent = new CustomEvent('click_point', {
+//     detail: null
+//   })
+// }
+
 window.togglePoint = (_this) => {
   myEvent.msg = _this.dataset
   if (window.dispatchEvent) {
@@ -55,17 +63,24 @@ export function calcLabelPosition (pathSet) {
 
   return [(minLng + maxLng) / 2, (minLat + maxLat) / 2]
 }
-export const paintText = ({ name, position, id, menuCode, pointType = 'first' }, map) => {
+export const paintText = ({ name, position, id, level = 1 }, map, color) => {
   const [lng, lat] = position
   var marker = new window.AMap.Marker({
     position,
     // 将 html 传给 content
-    content: `<div class="${pointType}-label font20" data-lng='${lng}' data-pointtype='networkPoint' data-zoomtype='${pointType}' data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}'>${name}</div>`,
+    content: `<div class="network${level}-label font20" 
+    style='color:${color}'
+    data-lng='${lng}' data-level='${level}' data-pointtype='networkPoint'  data-lat='${lat}'  onclick='togglePoint(this)' data-id='${id}'>${name}</div>`,
     // 以 icon 的 [center bottom] 为原点
     offset: new window.AMap.Pixel(-13, -30)
   })
   marker.setMap(map)
 }
+// export const handleNetworkText = (className, isHide) => {
+//   const els = document.getElementsByClassName(className + '-label')
+//   // if()
+// }
+
 const iconColorMap = new Map([
   ['xdry', '#ca58ff'],
   ['yqfk', '#42e2cb'],

@@ -3,6 +3,9 @@ const path = (path) => require('path').resolve(__dirname, path)
 
 module.exports = {
 
+  // entry: {
+  //   app: ['babel-polyfill', './src/main.js']
+  // },
   configureWebpack: {
     module: {
       rules: [

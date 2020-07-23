@@ -1,10 +1,10 @@
 
 <template>
-<div class="container font14" >
+<div class="container font14" :class="isHide?'con-hide':''" >
     <div class="arrow" @click="isHide=!isHide">
       <i class="iconfont icon-jiantou" :class="isHide?'':'rotate-180'" />
     </div>
-    <div class="con flex-row justify-around" :class="isHide?'con-hide':''">
+    <div class="con flex-row justify-around" >
     <FirstBaseInfo :baseInfo='firstBaseInfo'  class="flex5" />
     <div class="bar"></div>
 
